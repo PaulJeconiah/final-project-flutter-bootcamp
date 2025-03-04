@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 import 'package:project_akhir_flutter_bootcamp/app/routes/app_pages.dart';
 import 'package:project_akhir_flutter_bootcamp/components/custom_button.dart';
 import 'package:project_akhir_flutter_bootcamp/components/text_field.dart';
 
-import '../controllers/login_controller.dart';
+class SignupView extends StatelessWidget {
+  const SignupView({super.key});
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,41 +21,56 @@ class LoginView extends GetView<LoginController> {
                 flex: 3,
                 child: Image.asset(
                   "assets/images/makeup-logo.png",
-                  width: 334,
-                  height: 334,
+                  width: MediaQuery.of(context).size.width * 0.8,
+                  height: MediaQuery.of(context).size.height * 0.4,
                 ),
               ),
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Text(
+                        "Sign Up",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: 36,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    MyTextField(obscureText: false),
                     MyTextField(
                       obscureText: false,
-                      icon: Icons.person_outline_rounded,
+                      hintText: "E-Mail",
+                      icon: Icons.email_outlined,
                     ),
                     MyTextField(
                       obscureText: true,
-                      icon: Icons.lock_outline_rounded,
                       hintText: "Password",
+                      icon: Icons.lock_outline_rounded,
                     ),
                   ],
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: Column(
                   children: [
                     CustomButton(
-                      mainColor: Color(0xFFC16F11),
+                      text: "Sign Up",
                       textColor: Colors.white,
+                      mainColor: Color(0xFFC16F11),
                     ),
                     SizedBox(height: 5),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Belum punya akun? ",
+                          "Sudah punya akun? ",
                           style: TextStyle(
                             fontFamily: "Poppins",
                             fontWeight: FontWeight.w300,
@@ -67,10 +80,10 @@ class LoginView extends GetView<LoginController> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Get.toNamed(Routes.SIGNUP);
+                            Get.toNamed(Routes.LOGIN);
                           },
                           child: Text(
-                            "Sign Up",
+                            "Login",
                             style: TextStyle(
                               fontFamily: "Poppins",
                               fontWeight: FontWeight.bold,
@@ -80,16 +93,6 @@ class LoginView extends GetView<LoginController> {
                           ),
                         ),
                       ],
-                    ),
-                    SizedBox(height: 15),
-                    Text(
-                      "Lupa Password?",
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 16,
-                      ),
                     ),
                   ],
                 ),
