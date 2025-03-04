@@ -6,6 +6,8 @@ abstract class Routes {
   static const HOME = _Paths.HOME;
   static const LOGIN = _Paths.LOGIN;
   static const SIGNUP = _Paths.SIGNUP;
+  static const LUPA_PASSWORD = _Paths.LUPA_PASSWORD;
+  static const BOTTOM_NAVBAR = _Paths.BOTTOM_NAVBAR;
 }
 
 abstract class _Paths {
@@ -13,4 +15,6 @@ abstract class _Paths {
   static const HOME = '/home';
   static const LOGIN = '/login';
   static const SIGNUP = '/signup';
+  static const LUPA_PASSWORD = '/lupa-password';
+  static const BOTTOM_NAVBAR = '/bottom-navbar';
 }

@@ -82,13 +82,18 @@ class LoginView extends GetView<LoginController> {
                       ],
                     ),
                     SizedBox(height: 15),
-                    Text(
-                      "Lupa Password?",
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 16,
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.LUPA_PASSWORD);
+                      },
+                      child: Text(
+                        "Lupa Password?",
+                        style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],
