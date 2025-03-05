@@ -8,6 +8,8 @@ abstract class Routes {
   static const SIGNUP = _Paths.SIGNUP;
   static const LUPA_PASSWORD = _Paths.LUPA_PASSWORD;
   static const BOTTOM_NAVBAR = _Paths.BOTTOM_NAVBAR;
+  static const BERITA = _Paths.BERITA;
+  static const AKUN_SAYA = _Paths.AKUN_SAYA;
 }
 
 abstract class _Paths {
@@ -17,4 +19,6 @@ abstract class _Paths {
   static const SIGNUP = '/signup';
   static const LUPA_PASSWORD = '/lupa-password';
   static const BOTTOM_NAVBAR = '/bottom-navbar';
+  static const BERITA = '/berita';
+  static const AKUN_SAYA = '/akun-saya';
 }

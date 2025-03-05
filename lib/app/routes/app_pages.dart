@@ -1,7 +1,11 @@
 import 'package:get/get.dart';
 
+import '../modules/AkunSaya/bindings/akun_saya_binding.dart';
+import '../modules/AkunSaya/views/akun_saya_view.dart';
 import '../modules/BottomNavbar/bindings/bottom_navbar_binding.dart';
 import '../modules/BottomNavbar/views/bottom_navbar_view.dart';
+import '../modules/berita/bindings/berita_binding.dart';
+import '../modules/berita/views/berita_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -16,7 +20,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.HOME;
 
   static final routes = [
     GetPage(
@@ -41,8 +45,18 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.BOTTOM_NAVBAR,
-      page: () => const BottomNavbarView(),
+      page: () => BottomNavbarView(),
       binding: BottomNavbarBinding(),
+    ),
+    GetPage(
+      name: _Paths.BERITA,
+      page: () => const BeritaView(),
+      binding: BeritaBinding(),
+    ),
+    GetPage(
+      name: _Paths.AKUN_SAYA,
+      page: () => const AkunSayaView(),
+      binding: AkunSayaBinding(),
     ),
   ];
 }

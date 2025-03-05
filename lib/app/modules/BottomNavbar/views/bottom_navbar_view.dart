@@ -1,22 +1,37 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-
-import '../controllers/bottom_navbar_controller.dart';
+import 'package:project_akhir_flutter_bootcamp/app/modules/AkunSaya/views/akun_saya_view.dart';
+import 'package:project_akhir_flutter_bootcamp/app/modules/BottomNavbar/controllers/bottom_navbar_controller.dart';
+import 'package:project_akhir_flutter_bootcamp/app/modules/berita/views/berita_view.dart';
+import 'package:project_akhir_flutter_bootcamp/app/modules/home/views/home_view.dart';
 
 class BottomNavbarView extends GetView<BottomNavbarController> {
-  const BottomNavbarView({super.key});
+  BottomNavbarView({super.key});
+
+  final List<Widget> _pages = [HomeView(), BeritaView(), AkunSayaView()];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BottomNavbarView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'BottomNavbarView is working',
-          style: TextStyle(fontSize: 20),
+      body: Obx(() => _pages[controller.selectedIndex.value]),
+      bottomNavigationBar: SafeArea(
+        child: Obx(
+          () => BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Beranda,",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.newspaper_outlined),
+                label: "Berita",
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.person_outline_outlined),
+                label: "Akun Saya",
+              ),
+            ],
+          ),
         ),
       ),
     );
