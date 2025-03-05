@@ -17,11 +17,10 @@ class BottomNavbarView extends GetView<BottomNavbarController> {
       bottomNavigationBar: SafeArea(
         child: Obx(
           () => BottomNavigationBar(
+            currentIndex: controller.selectedIndex.value,
+            onTap: (value) => controller.changeIndex(value),
             items: [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home),
-                label: "Beranda,",
-              ),
+              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
               BottomNavigationBarItem(
                 icon: Icon(Icons.newspaper_outlined),
                 label: "Berita",

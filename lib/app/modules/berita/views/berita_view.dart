@@ -9,14 +9,18 @@ class BeritaView extends GetView<BeritaController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('BeritaView'),
-        centerTitle: true,
-      ),
-      body: const Center(
-        child: Text(
-          'BeritaView is working',
-          style: TextStyle(fontSize: 20),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Text(
+              "Berita",
+              style: TextStyle(
+                fontFamily: "Poppins",
+                fontSize: 33,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ],
         ),
       ),
     );
