@@ -27,13 +27,13 @@ class HomeView extends GetView<HomeController> {
                         fontFamily: "Poppins",
                         fontSize: 33,
                         fontWeight: FontWeight.w500,
-                        color: Color(0xFF005F5F),
+                        color: Color(0xFF722F37),
                       ),
                     ),
                     Container(
                       padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
-                        color: Color(0xFF005F5F),
+                        color: Color(0xFF722F37),
                         borderRadius: BorderRadius.circular(12),
                       ),
                       child: Icon(
@@ -70,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                   padding: const EdgeInsets.only(top: 24),
                   child: TextField(
                     decoration: InputDecoration(
-                      fillColor: Color(0xFF98DBDE),
+                      fillColor: Color(0xFFD49FA6),
                       filled: true,
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(30),
@@ -97,7 +97,7 @@ class HomeView extends GetView<HomeController> {
                         fontFamily: "Poppins",
                         fontSize: 20,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xFF005F5F),
+                        color: Color(0xFF722F37),
                       ),
                     ),
                   ],

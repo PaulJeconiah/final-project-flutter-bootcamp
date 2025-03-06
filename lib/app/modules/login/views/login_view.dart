@@ -13,7 +13,7 @@ class LoginView extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xFF005F5F),
+      backgroundColor: Color(0xFF722F37),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 43, right: 44),
@@ -48,9 +48,14 @@ class LoginView extends GetView<LoginController> {
                 flex: 2,
                 child: Column(
                   children: [
-                    CustomButton(
-                      mainColor: Color(0xFFC16F11),
-                      textColor: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(Routes.BOTTOM_NAVBAR);
+                      },
+                      child: CustomButton(
+                        mainColor: Color(0xFFC16F11),
+                        textColor: Colors.white,
+                      ),
                     ),
                     SizedBox(height: 5),
                     Row(

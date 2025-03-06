@@ -17,10 +17,17 @@ class BottomNavbarView extends GetView<BottomNavbarController> {
       bottomNavigationBar: SafeArea(
         child: Obx(
           () => BottomNavigationBar(
+            backgroundColor: Color(0xFF722F37),
             currentIndex: controller.selectedIndex.value,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white70,
             onTap: (value) => controller.changeIndex(value),
             items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: "Beranda"),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.home),
+                label: "Beranda",
+                backgroundColor: Colors.white,
+              ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.newspaper_outlined),
                 label: "Berita",

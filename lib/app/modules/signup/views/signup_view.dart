@@ -11,7 +11,7 @@ class SignupView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Color(0xFF005F5F),
+      backgroundColor: Color(0xFF722F37),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(left: 43, right: 44),

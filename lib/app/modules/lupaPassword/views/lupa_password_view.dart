@@ -11,7 +11,7 @@ class LupaPasswordView extends GetView<LupaPasswordController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF005F5F),
+      backgroundColor: Color(0xFF722F37),
       body: Padding(
         padding: const EdgeInsets.only(left: 43, right: 44),
         child: Column(

@@ -10,13 +10,15 @@ class CarouselPage extends StatelessWidget {
       child: Stack(
         children: [
           // Gambar dengan border radius
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
-              "assets/images/makeup-news2.png",
-              width: MediaQuery.of(context).size.width * 0.9,
-              height: MediaQuery.of(context).size.height * 0.2,
-              fit: BoxFit.fill,
+          Center(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                "assets/images/makeup-news2.png",
+                width: MediaQuery.of(context).size.width * 0.9,
+                height: MediaQuery.of(context).size.height * 0.2,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
           // Kategori (MAKE-UP) - Posisi kanan atas
