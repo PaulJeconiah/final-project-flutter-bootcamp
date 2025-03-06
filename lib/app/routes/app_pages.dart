@@ -4,6 +4,8 @@ import '../modules/AkunSaya/bindings/akun_saya_binding.dart';
 import '../modules/AkunSaya/views/akun_saya_view.dart';
 import '../modules/BottomNavbar/bindings/bottom_navbar_binding.dart';
 import '../modules/BottomNavbar/views/bottom_navbar_view.dart';
+import '../modules/TentangKami/bindings/tentang_kami_binding.dart';
+import '../modules/TentangKami/views/tentang_kami_view.dart';
 import '../modules/berita/bindings/berita_binding.dart';
 import '../modules/berita/views/berita_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.AKUN_SAYA,
       page: () => const AkunSayaView(),
       binding: AkunSayaBinding(),
+    ),
+    GetPage(
+      name: _Paths.TENTANG_KAMI,
+      page: () => const TentangKamiView(),
+      binding: TentangKamiBinding(),
     ),
   ];
 }

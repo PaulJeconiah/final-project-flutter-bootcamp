@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:project_akhir_flutter_bootcamp/app/routes/app_pages.dart';
 import 'package:project_akhir_flutter_bootcamp/components/custom_akun_saya_page.dart';
 
 import '../controllers/akun_saya_controller.dart';
@@ -43,10 +44,15 @@ class AkunSayaView extends GetView<AkunSayaController> {
               mainText: "Bantuan",
               descText: "Untuk menemukan solusi dari masalah umum",
             ),
-            CustomAkunSayaPage(
-              icon: Icons.info_outlined,
-              mainText: "Tentang Ayunee",
-              descText: "Informasi tentang Ayunee",
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.TENTANG_KAMI);
+              },
+              child: CustomAkunSayaPage(
+                icon: Icons.info_outlined,
+                mainText: "Tentang Ayunee",
+                descText: "Informasi tentang Ayunee",
+              ),
             ),
           ],
         ),

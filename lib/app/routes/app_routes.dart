@@ -10,6 +10,7 @@ abstract class Routes {
   static const BOTTOM_NAVBAR = _Paths.BOTTOM_NAVBAR;
   static const BERITA = _Paths.BERITA;
   static const AKUN_SAYA = _Paths.AKUN_SAYA;
+  static const TENTANG_KAMI = _Paths.TENTANG_KAMI;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const BOTTOM_NAVBAR = '/bottom-navbar';
   static const BERITA = '/berita';
   static const AKUN_SAYA = '/akun-saya';
+  static const TENTANG_KAMI = '/tentang-kami';
 }
