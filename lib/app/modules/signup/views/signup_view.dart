@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:project_akhir_flutter_bootcamp/app/routes/app_pages.dart';
@@ -5,7 +6,32 @@ import 'package:project_akhir_flutter_bootcamp/components/custom_button.dart';
 import 'package:project_akhir_flutter_bootcamp/components/text_field.dart';
 
 class SignupView extends StatelessWidget {
-  const SignupView({super.key});
+  // text controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmpasswordController = TextEditingController();
+
+  Future signUp() async {
+    if (passwordConfirmed()) {
+      try {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: _emailController.text,
+          password: _passwordController.text,
+        );
+        Get.snackbar("success", "bisa njing", backgroundColor: Colors.white);
+      } catch (e) {
+        Get.snackbar("error", "memek", backgroundColor: Colors.white);
+      }
+    }
+  }
+
+  bool passwordConfirmed() {
+    if (_passwordController.text == _confirmpasswordController.text) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,15 +68,20 @@ class SignupView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    MyTextField(obscureText: false),
                     MyTextField(
+                      controller: _emailController,
                       obscureText: false,
-                      hintText: "E-Mail",
-                      icon: Icons.email_outlined,
                     ),
                     MyTextField(
+                      controller: _passwordController,
                       obscureText: true,
                       hintText: "Password",
+                      icon: Icons.lock_outline_rounded,
+                    ),
+                    MyTextField(
+                      controller: _confirmpasswordController,
+                      obscureText: true,
+                      hintText: "Konfirmasi Password",
                       icon: Icons.lock_outline_rounded,
                     ),
                   ],
@@ -60,10 +91,15 @@ class SignupView extends StatelessWidget {
                 flex: 1,
                 child: Column(
                   children: [
-                    CustomButton(
-                      text: "Sign Up",
-                      textColor: Colors.white,
-                      mainColor: Color(0xFFC16F11),
+                    GestureDetector(
+                      onTap: () {
+                        signUp();
+                      },
+                      child: CustomButton(
+                        text: "Sign Up",
+                        textColor: Colors.white,
+                        mainColor: Color(0xFFC16F11),
+                      ),
                     ),
                     SizedBox(height: 5),
                     Row(

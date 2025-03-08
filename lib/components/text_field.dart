@@ -60,7 +60,7 @@ class _MyTextFieldState extends State<MyTextField> {
             ),
           ),
           // labelText: widget.labelText ?? "Username",
-          hintText: widget.hintText ?? "Username",
+          hintText: widget.hintText ?? "Email",
           suffixIcon:
               widget.obscureText
                   ? IconButton(

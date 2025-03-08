@@ -6,6 +6,8 @@ import '../modules/BottomNavbar/bindings/bottom_navbar_binding.dart';
 import '../modules/BottomNavbar/views/bottom_navbar_view.dart';
 import '../modules/TentangKami/bindings/tentang_kami_binding.dart';
 import '../modules/TentangKami/views/tentang_kami_view.dart';
+import '../modules/authWrapper/bindings/auth_wrapper_binding.dart';
+import '../modules/authWrapper/views/auth_wrapper_view.dart';
 import '../modules/berita/bindings/berita_binding.dart';
 import '../modules/berita/views/berita_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -14,6 +16,8 @@ import '../modules/login/bindings/login_binding.dart';
 import '../modules/login/views/login_view.dart';
 import '../modules/lupaPassword/bindings/lupa_password_binding.dart';
 import '../modules/lupaPassword/views/lupa_password_view.dart';
+import '../modules/notifikasi/bindings/notifikasi_binding.dart';
+import '../modules/notifikasi/views/notifikasi_view.dart';
 import '../modules/signup/bindings/signup_binding.dart';
 import '../modules/signup/views/signup_view.dart';
 
@@ -32,12 +36,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.LOGIN,
-      page: () => const LoginView(),
-      binding: LoginBinding(),
+      page: () => LoginView(),
+      binding: AuthWrapperBinding(),
     ),
     GetPage(
       name: _Paths.SIGNUP,
-      page: () => const SignupView(),
+      page: () => SignupView(),
       binding: SignupBinding(),
     ),
     GetPage(
@@ -64,6 +68,16 @@ class AppPages {
       name: _Paths.TENTANG_KAMI,
       page: () => const TentangKamiView(),
       binding: TentangKamiBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFIKASI,
+      page: () => const NotifikasiView(),
+      binding: NotifikasiBinding(),
+    ),
+    GetPage(
+      name: _Paths.AUTH_WRAPPER,
+      page: () => const AuthWrapperView(),
+      binding: AuthWrapperBinding(),
     ),
   ];
 }

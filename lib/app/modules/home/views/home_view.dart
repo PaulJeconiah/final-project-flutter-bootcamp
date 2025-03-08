@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:project_akhir_flutter_bootcamp/components/custom_carousel.dart';
+import 'package:project_akhir_flutter_bootcamp/components/product_skeletonizer.dart';
+// import 'package:skeletonizer/skeletonizer.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -70,6 +72,7 @@ class HomeView extends GetView<HomeController> {
                   padding: const EdgeInsets.only(top: 24),
                   child: TextField(
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.only(top: 20),
                       fillColor: Color(0xFFD49FA6),
                       filled: true,
                       enabledBorder: OutlineInputBorder(
@@ -86,22 +89,112 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
               ),
-              Expanded(child: Container()),
+
               Expanded(
                 flex: 5,
-                child: ListView(
-                  children: [
-                    Text(
-                      "Explore Makeup",
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                        color: Color(0xFF722F37),
+                child: Obx(() {
+                  if (controller.productList.isEmpty) {
+                    return ProductSkeletonizer(
+                      productList: [],
+                      isLoading: true,
+                    );
+                  }
+                  return ListView(
+                    controller:
+                        controller
+                            .scrollController, // Tambahkan controller buat deteksi scroll
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0,
+                          vertical: 4.0,
+                        ),
+                        child: Text(
+                          "Explore Makeup",
+                          style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF722F37),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics:
+                            NeverScrollableScrollPhysics(), // Supaya scroll pakai ListView utama
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                        itemCount: controller.productList.length,
+                        itemBuilder: (context, index) {
+                          var product = controller.productList[index];
+                          return Card(
+                            elevation: 4,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: Image.network(
+                                    product.imageLink ?? '',
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Icon(
+                                        Icons.image_not_supported,
+                                        size: 50,
+                                        color: Colors.grey,
+                                      );
+                                    },
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                    product.name ?? "No Name",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontFamily: "Poppins",
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                      ProductSkeletonizer(
+                        productList: controller.productList,
+                        isLoading: controller.isLoadingMore.value,
+                      ),
+                      SizedBox(height: 10),
+                      Obx(() {
+                        if (controller.isAllLoaded.value) {
+                          return SizedBox(); // Jangan tampilkan tombol jika semua data sudah dimuat
+                        }
+                        return controller.isLoadingMore.value
+                            ? Center(
+                              child: CircularProgressIndicator(),
+                            ) // Tampilkan loader saat loading
+                            : Center(
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ElevatedButton(
+                                  onPressed: controller.fetchProducts,
+                                  child: Text("Load More Results"),
+                                ),
+                              ),
+                            );
+                      }),
+                    ],
+                  );
+                }),
               ),
             ],
           ),

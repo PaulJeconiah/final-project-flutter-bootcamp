@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "548330753379",
+    "project_id": "project-akhir-sanbercode",
+    "storage_bucket": "project-akhir-sanbercode.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:548330753379:android:068a204a359f75fd501756",
+        "android_client_info": {
+          "package_name": "com.projectakhirflutterbootcamp.project_akhir_flutter_bootcamp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCH0SQ3vqu10zKR-HLDmL5SlbAx3pPkOZE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,14 +1,20 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:project_akhir_flutter_bootcamp/app/modules/authWrapper/controllers/auth_wrapper_controller.dart';
 import 'package:project_akhir_flutter_bootcamp/app/routes/app_pages.dart';
 import 'package:project_akhir_flutter_bootcamp/components/custom_button.dart';
 import 'package:project_akhir_flutter_bootcamp/components/text_field.dart';
 
 import '../controllers/login_controller.dart';
 
-class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+class LoginView extends GetView<AuthWrapperController> {
+  // const LoginView({super.key});
+  // text controller
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,10 +39,12 @@ class LoginView extends GetView<LoginController> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     MyTextField(
+                      controller: _emailController,
                       obscureText: false,
-                      icon: Icons.person_outline_rounded,
+                      icon: Icons.email_outlined,
                     ),
                     MyTextField(
+                      controller: _passwordController,
                       obscureText: true,
                       icon: Icons.lock_outline_rounded,
                       hintText: "Password",
@@ -50,7 +58,10 @@ class LoginView extends GetView<LoginController> {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        Get.toNamed(Routes.BOTTOM_NAVBAR);
+                        controller.Login(
+                          _emailController.text,
+                          _passwordController.text,
+                        );
                       },
                       child: CustomButton(
                         mainColor: Color(0xFFC16F11),

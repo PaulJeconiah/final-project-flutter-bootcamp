@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomAkunSayaPage extends StatelessWidget {
-  const CustomAkunSayaPage({
-    super.key,
-    this.icon,
-    this.mainText,
-    this.descText,
-  });
+class CustomCardPage extends StatelessWidget {
+  const CustomCardPage({super.key, this.icon, this.mainText, this.descText});
 
   final IconData? icon;
   final String? mainText;
