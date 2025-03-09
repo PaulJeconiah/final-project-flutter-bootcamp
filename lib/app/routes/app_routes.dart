@@ -13,6 +13,7 @@ abstract class Routes {
   static const TENTANG_KAMI = _Paths.TENTANG_KAMI;
   static const NOTIFIKASI = _Paths.NOTIFIKASI;
   static const AUTH_WRAPPER = _Paths.AUTH_WRAPPER;
+  static const BANTUAN = _Paths.BANTUAN;
 }
 
 abstract class _Paths {
@@ -27,4 +28,5 @@ abstract class _Paths {
   static const TENTANG_KAMI = '/tentang-kami';
   static const NOTIFIKASI = '/notifikasi';
   static const AUTH_WRAPPER = '/auth-wrapper';
+  static const BANTUAN = '/bantuan';
 }

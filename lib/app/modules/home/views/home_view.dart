@@ -20,31 +20,29 @@ class HomeView extends GetView<HomeController> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 15),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Beranda",
-                      style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 33,
-                        fontWeight: FontWeight.w500,
-                        color: Color(0xFF722F37),
-                      ),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    "Beranda",
+                    style: TextStyle(
+                      fontFamily: "Poppins",
+                      fontSize: 33,
+                      fontWeight: FontWeight.w500,
+                      color: Color(0xFF722F37),
                     ),
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF722F37),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Icon(
-                        Icons.shopping_cart_outlined,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
+                // Container(
+                //   padding: const EdgeInsets.all(8.0),
+                //   decoration: BoxDecoration(
+                //     color: Color(0xFF722F37),
+                //     borderRadius: BorderRadius.circular(12),
+                //   ),
+                //   child: Icon(
+                //     Icons.shopping_cart_outlined,
+                //     color: Colors.white,
+                //   ),
+                // ),
               ),
 
               // Carousel Berita
@@ -71,6 +69,8 @@ class HomeView extends GetView<HomeController> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 24),
                   child: TextField(
+                    controller: controller.searchController,
+                    onChanged: (value) => controller.filterProducts(value),
                     decoration: InputDecoration(
                       contentPadding: EdgeInsets.only(top: 20),
                       fillColor: Color(0xFFD49FA6),
@@ -93,16 +93,15 @@ class HomeView extends GetView<HomeController> {
               Expanded(
                 flex: 5,
                 child: Obx(() {
-                  if (controller.productList.isEmpty) {
-                    return ProductSkeletonizer(
-                      productList: [],
-                      isLoading: true,
-                    );
+                  if (controller.filteredList.isEmpty &&
+                      controller.isSearching.value) {
+                    return Center(child: Text("Produk tidak ditemukan"));
                   }
-                  return ListView(
-                    controller:
-                        controller
-                            .scrollController, // Tambahkan controller buat deteksi scroll
+                  if (controller.productList.isEmpty) {
+                    return Center(child: CircularProgressIndicator());
+                  }
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
                         padding: const EdgeInsets.symmetric(
@@ -119,79 +118,126 @@ class HomeView extends GetView<HomeController> {
                           ),
                         ),
                       ),
-                      GridView.builder(
-                        shrinkWrap: true,
-                        physics:
-                            NeverScrollableScrollPhysics(), // Supaya scroll pakai ListView utama
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 8,
-                          mainAxisSpacing: 8,
-                        ),
-                        itemCount: controller.productList.length,
-                        itemBuilder: (context, index) {
-                          var product = controller.productList[index];
-                          return Card(
-                            elevation: 4,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Expanded(
-                                  child: Image.network(
-                                    product.imageLink ?? '',
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Icon(
-                                        Icons.image_not_supported,
-                                        size: 50,
-                                        color: Colors.grey,
-                                      );
-                                    },
-                                  ),
+                      Expanded(
+                        child: GridView.builder(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 8,
+                                mainAxisSpacing: 8,
+                              ),
+                          itemCount: controller.filteredList.length,
+                          itemBuilder: (context, index) {
+                            var product = controller.filteredList[index];
+                            return GestureDetector(
+                              onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    var product =
+                                        controller.filteredList[index];
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(16),
+                                      ),
+                                      contentPadding: EdgeInsets.all(16),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Text(
+                                            textAlign: TextAlign.center,
+                                            product.name ?? "No name",
+                                            style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.bold,
+                                              color: Color(0xFF722F37),
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(
+                                              8,
+                                            ),
+                                            child: Image.network(
+                                              product.imageLink ?? "",
+                                              height: 120,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (
+                                                context,
+                                                error,
+                                                stackTrace,
+                                              ) {
+                                                return Icon(
+                                                  Icons
+                                                      .image_not_supported_outlined,
+                                                  size: 50,
+                                                  color: Colors.grey,
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                          SizedBox(height: 10),
+                                          Text(
+                                            product.description ??
+                                                "No Description",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              fontFamily: "Poppins",
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400,
+                                              color: Color(0xFF4E2328),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                              child: Card(
+                                elevation: 4,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                    product.name ?? "No Name",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontFamily: "Poppins",
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.bold,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Image.network(
+                                        product.imageLink ?? '',
+                                        fit: BoxFit.cover,
+                                        errorBuilder: (
+                                          context,
+                                          error,
+                                          stackTrace,
+                                        ) {
+                                          return Icon(
+                                            Icons.image_not_supported,
+                                            size: 50,
+                                            color: Colors.grey,
+                                          );
+                                        },
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                      ),
-                      ProductSkeletonizer(
-                        productList: controller.productList,
-                        isLoading: controller.isLoadingMore.value,
-                      ),
-                      SizedBox(height: 10),
-                      Obx(() {
-                        if (controller.isAllLoaded.value) {
-                          return SizedBox(); // Jangan tampilkan tombol jika semua data sudah dimuat
-                        }
-                        return controller.isLoadingMore.value
-                            ? Center(
-                              child: CircularProgressIndicator(),
-                            ) // Tampilkan loader saat loading
-                            : Center(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ElevatedButton(
-                                  onPressed: controller.fetchProducts,
-                                  child: Text("Load More Results"),
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Text(
+                                        product.name ?? "No Name",
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontFamily: "Poppins",
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             );
-                      }),
+                          },
+                        ),
+                      ),
                     ],
                   );
                 }),

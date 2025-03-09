@@ -18,9 +18,18 @@ class SignupView extends StatelessWidget {
           email: _emailController.text,
           password: _passwordController.text,
         );
-        Get.snackbar("success", "bisa njing", backgroundColor: Colors.white);
+        Get.snackbar(
+          "Berhasil!",
+          "berhasil Daftar",
+          backgroundColor: Colors.white,
+        );
+        Get.toNamed(Routes.LOGIN);
       } catch (e) {
-        Get.snackbar("error", "memek", backgroundColor: Colors.white);
+        Get.snackbar(
+          "error",
+          "Tidak bisa mendaftarkan akun",
+          backgroundColor: Colors.white,
+        );
       }
     }
   }

@@ -8,6 +8,8 @@ import '../modules/TentangKami/bindings/tentang_kami_binding.dart';
 import '../modules/TentangKami/views/tentang_kami_view.dart';
 import '../modules/authWrapper/bindings/auth_wrapper_binding.dart';
 import '../modules/authWrapper/views/auth_wrapper_view.dart';
+import '../modules/bantuan/bindings/bantuan_binding.dart';
+import '../modules/bantuan/views/bantuan_view.dart';
 import '../modules/berita/bindings/berita_binding.dart';
 import '../modules/berita/views/berita_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -26,7 +28,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.LOGIN;
+  static const INITIAL = Routes.BOTTOM_NAVBAR;
 
   static final routes = [
     GetPage(
@@ -78,6 +80,11 @@ class AppPages {
       name: _Paths.AUTH_WRAPPER,
       page: () => const AuthWrapperView(),
       binding: AuthWrapperBinding(),
+    ),
+    GetPage(
+      name: _Paths.BANTUAN,
+      page: () => const BantuanView(),
+      binding: BantuanBinding(),
     ),
   ];
 }

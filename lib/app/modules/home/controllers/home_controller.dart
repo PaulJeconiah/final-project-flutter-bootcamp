@@ -14,6 +14,10 @@ class HomeController extends GetxController {
   int currentOffset = 0;
   final int limit = 10;
 
+  var filteredList = <UserModel>[].obs;
+  var isSearching = false.obs;
+  final searchController = TextEditingController();
+
   @override
   void onInit() {
     super.onInit();
@@ -36,6 +40,7 @@ class HomeController extends GetxController {
     // productList.assignAll(products);
     if (products.isNotEmpty) {
       productList.addAll(products);
+      filteredList.assignAll(productList);
       currentOffset += products.length;
     } else {
       isAllLoaded.value = true;
@@ -43,6 +48,20 @@ class HomeController extends GetxController {
     isLoadingMore.value = false;
   }
 
+  void filterProducts(String query) {
+    if (query.isEmpty) {
+      isSearching.value = false;
+      filteredList.assignAll(productList);
+    } else {
+      isSearching.value = true;
+      filteredList.assignAll(
+        productList.where(
+          (product) =>
+              product.name!.toLowerCase().contains(query.toLowerCase()),
+        ),
+      );
+    }
+  }
   // Future<void> loadMoreProducts() async {
   //   if (isLoadingMore.value) {
   //     return;

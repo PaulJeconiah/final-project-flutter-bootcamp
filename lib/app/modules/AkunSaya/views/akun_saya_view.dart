@@ -116,10 +116,15 @@ class AkunSayaView extends GetView<AkunSayaController> {
             // ],
 
             // Bantuan
-            CustomCardPage(
-              icon: Icons.help_outline_outlined,
-              mainText: "Bantuan",
-              descText: "Untuk menemukan solusi dari masalah umum",
+            GestureDetector(
+              onTap: () {
+                Get.toNamed(Routes.BANTUAN);
+              },
+              child: CustomCardPage(
+                icon: Icons.help_outline_outlined,
+                mainText: "Bantuan",
+                descText: "Untuk menemukan solusi dari masalah umum",
+              ),
             ),
 
             // Tentang Kami
